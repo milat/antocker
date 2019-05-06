@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  php:
+    build: ./php5.6
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - ../dev:/var/www/html
+    links:
+    - mysql
+
+  mysql:
+    build: ./mysql5.7
+    ports: 
+    - "3306:3306"
+    volumes:
+    - ../db/mysql:/var/lib/mysql
+    environment:
+    - MYSQL_HOST=127.0.0.1
+    - MYSQL_PORT=3306
+    - MYSQL_DATABASE=default_db
+    - MYSQL_USER=default_user
+    - MYSQL_PASSWORD=default_password
+    - MYSQL_ROOT_PASSWORD=rootpassword
