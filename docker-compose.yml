@@ -10,6 +10,7 @@ services:
     - ../dev:/var/www/html
     links:
     - mysql
+    - mongo
 
   mysql:
     build: ./mysql5.7
@@ -20,7 +21,17 @@ services:
     environment:
     - MYSQL_HOST=127.0.0.1
     - MYSQL_PORT=3306
-    - MYSQL_DATABASE=default_db
-    - MYSQL_USER=default_user
-    - MYSQL_PASSWORD=default_password
-    - MYSQL_ROOT_PASSWORD=rootpassword
+    - MYSQL_DATABASE=${DEFAULT_DATABASE}
+    - MYSQL_USER=${DEFAULT_USER}
+    - MYSQL_PASSWORD=${DEFAULT_PASSWORD}
+    - MYSQL_ROOT_PASSWORD=${DEFAULT_ROOT_PASSWORD}
+
+  mongo:
+    build: ./mongo
+    ports:
+    - "27017:27017"
+    volumes:
+    - ../db/mongo:/data/db
+    environment:
+    - MONGODB_ROOT_USERNAME=${DEFAULT_ROOT_USER}
+    - MONGODB_ROOT_PASSWORD=${DEFAULT_ROOT_PASSWORD}
