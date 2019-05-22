@@ -1,7 +1,9 @@
 version: '3'
 
 services:
-  php:
+
+  php5.6:
+    container_name: php5.6
     build: ./php5.6
     ports:
     - "80:80"
@@ -9,12 +11,13 @@ services:
     volumes:
     - ../dev:/var/www/html
     links:
-    - mysql
-    - mongo
+    - mysql5.7
+    - mongo4
 
-  mysql:
+  mysql5.7:
+    container_name: mysql5.7
     build: ./mysql5.7
-    ports: 
+    ports:
     - "3306:3306"
     volumes:
     - ../db/mysql:/var/lib/mysql
@@ -26,8 +29,9 @@ services:
     - MYSQL_PASSWORD=${DEFAULT_PASSWORD}
     - MYSQL_ROOT_PASSWORD=${DEFAULT_ROOT_PASSWORD}
 
-  mongo:
-    build: ./mongo
+  mongo4:
+    container_name: mongo4
+    build: ./mongo4
     ports:
     - "27017:27017"
     volumes:

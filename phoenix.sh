@@ -16,4 +16,3 @@ echo "${GREEN}- ANTOCKER: RECONSTRUINDO E SUBINDO IMAGENS E CONTAINERS...${NC}"
 docker-compose up -d --build
 
 echo "${GREEN}- ANTOCKER: FINALIZADO${NC}"
-
