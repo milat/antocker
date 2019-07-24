@@ -13,6 +13,17 @@ services:
     links:
     - mysql5.7
     - mongo4
+    - memcached1.5
+    - redis5
+
+  php7.2:
+    container_name: php7.2
+    build: ./php7.2
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - ../dev:/var/www/html
 
   mysql5.7:
     container_name: mysql5.7
@@ -39,3 +50,15 @@ services:
     environment:
     - MONGODB_ROOT_USERNAME=${DEFAULT_ROOT_USER}
     - MONGODB_ROOT_PASSWORD=${DEFAULT_ROOT_PASSWORD}
+
+  memcached1.5:
+      container_name: memcached1.5
+      build: ./memcached1.5
+      ports:
+        - "11211:11211"
+
+  redis5:
+    container_name: redis5
+    build: ./redis5
+    ports:
+    - "6379:6379"

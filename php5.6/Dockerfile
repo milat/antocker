@@ -2,10 +2,10 @@ FROM php:5.6-apache
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y git zip unzip libssl-dev
+    apt-get install -y git zip unzip libssl-dev zlib1g-dev libmemcached-dev
 RUN docker-php-ext-install pdo pdo_mysql mysqli
 
-RUN pecl install xdebug-2.5.5 channel://pecl.php.net/mongo
+RUN pecl install redis memcached-2.2.0 xdebug-2.5.5 channel://pecl.php.net/mongo
 RUN docker-php-ext-enable xdebug
 
 RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/php.ini
