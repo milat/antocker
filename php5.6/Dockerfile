@@ -5,6 +5,10 @@ RUN apt-get update && \
     apt-get install -y git zip unzip libssl-dev zlib1g-dev libmemcached-dev
 RUN docker-php-ext-install pdo pdo_mysql mysqli
 
+RUN apt-get install -y libpq-dev \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pgsql
+
 RUN pecl install redis memcached-2.2.0 xdebug-2.5.5 channel://pecl.php.net/mongo
 RUN docker-php-ext-enable xdebug
 

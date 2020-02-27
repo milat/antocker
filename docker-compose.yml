@@ -24,6 +24,11 @@ services:
     - "443:443"
     volumes:
     - ../dev:/var/www/html
+    links:
+    - mysql5.7
+    - memcached1.5
+    - redis5
+    - mongo4
 
   mysql5.7:
     container_name: mysql5.7
