@@ -9,7 +9,7 @@ services:
     - "80:80"
     - "443:443"
     volumes:
-    - ../dev:/var/www/html
+    - ${PROJECTS_PATH}:/var/www/html
     links:
     - mysql5.7
     - mongo4
@@ -23,7 +23,7 @@ services:
     - "80:80"
     - "443:443"
     volumes:
-    - ../dev:/var/www/html
+    - ${PROJECTS_PATH}:/var/www/html
     links:
     - mysql5.7
     - memcached1.5
@@ -36,7 +36,7 @@ services:
     ports:
     - "3306:3306"
     volumes:
-    - ../db/mysql:/var/lib/mysql
+    - db/mysql:/var/lib/mysql
     environment:
     - MYSQL_HOST=127.0.0.1
     - MYSQL_PORT=3306
@@ -51,7 +51,7 @@ services:
     ports:
     - "27017:27017"
     volumes:
-    - ../db/mongo:/data/db
+    - db/mongo:/data/db
     environment:
     - MONGODB_ROOT_USERNAME=${DEFAULT_ROOT_USER}
     - MONGODB_ROOT_PASSWORD=${DEFAULT_ROOT_PASSWORD}
