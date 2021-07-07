@@ -5,6 +5,7 @@ services:
   php5.6:
     container_name: php5.6
     build: ./php5.6
+    # restart: unless-stopped
     ports:
     - "${PHP_5_6_PORT_80}:80"
     - "${PHP_5_6_PORT_443}:443"
@@ -19,6 +20,7 @@ services:
   php7.2:
     container_name: php7.2
     build: ./php7.2
+    # restart: unless-stopped
     ports:
     - "${PHP_7_2_PORT_80}:80"
     - "${PHP_7_2_PORT_443}:443"
@@ -33,6 +35,7 @@ services:
   php7.4:
     container_name: php7.4
     build: ./php7.4
+    # restart: unless-stopped
     ports:
     - "${PHP_7_4_PORT_80}:80"
     - "${PHP_7_4_PORT_443}:443"
@@ -47,6 +50,7 @@ services:
   php8.0:
     container_name: php8.0
     build: ./php8.0
+    # restart: unless-stopped
     ports:
     - "${PHP_8_0_PORT_80}:80"
     - "${PHP_8_0_PORT_443}:443"
