@@ -6,8 +6,8 @@ services:
     container_name: php5.6
     build: ./php5.6
     ports:
-    - "80:80"
-    - "443:443"
+    - "${PHP_5_6_PORT_80}:80"
+    - "${PHP_5_6_PORT_443}:443"
     volumes:
     - ${PROJECTS_PATH}:/var/www/html
     links:
@@ -20,8 +20,36 @@ services:
     container_name: php7.2
     build: ./php7.2
     ports:
-    - "80:80"
-    - "443:443"
+    - "${PHP_7_2_PORT_80}:80"
+    - "${PHP_7_2_PORT_443}:443"
+    volumes:
+    - ${PROJECTS_PATH}:/var/www/html
+    links:
+    - mysql5.7
+    - memcached1.5
+    - redis5
+    - mongo4
+
+  php7.4:
+    container_name: php7.4
+    build: ./php7.4
+    ports:
+    - "${PHP_7_4_PORT_80}:80"
+    - "${PHP_7_4_PORT_443}:443"
+    volumes:
+    - ${PROJECTS_PATH}:/var/www/html
+    links:
+    - mysql5.7
+    - memcached1.5
+    - redis5
+    - mongo4
+
+  php8.0:
+    container_name: php8.0
+    build: ./php8.0
+    ports:
+    - "${PHP_8_0_PORT_80}:80"
+    - "${PHP_8_0_PORT_443}:443"
     volumes:
     - ${PROJECTS_PATH}:/var/www/html
     links:
@@ -34,9 +62,9 @@ services:
     container_name: mysql5.7
     build: ./mysql5.7
     ports:
-    - "3306:3306"
+    - "${MYSQL_5_7_PORT}:3306"
     volumes:
-    - ../antocker/db/mysql:/var/lib/mysql
+    - ./db/mysql:/var/lib/mysql
     environment:
     - MYSQL_HOST=127.0.0.1
     - MYSQL_PORT=3306
@@ -49,9 +77,9 @@ services:
     container_name: mongo4
     build: ./mongo4
     ports:
-    - "27017:27017"
+    - "${MONGO_4_PORT}:27017"
     volumes:
-    - ../antocker/db/mongo:/data/db
+    - ./db/mongo:/data/db
     environment:
     - MONGODB_ROOT_USERNAME=${DEFAULT_ROOT_USER}
     - MONGODB_ROOT_PASSWORD=${DEFAULT_ROOT_PASSWORD}
@@ -60,13 +88,13 @@ services:
       container_name: memcached1.5
       build: ./memcached1.5
       ports:
-        - "11211:11211"
+        - "${MEMCACHED_1_5_PORT}:11211"
 
   redis5:
     container_name: redis5
     build: ./redis5
     ports:
-    - "6379:6379"
+    - "${REDIS_5_PORT}:6379"
     networks:
       - global-network
 
