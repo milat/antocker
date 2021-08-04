@@ -9,7 +9,7 @@ RUN apt-get update && \
 
 RUN apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo pdo_pgsql pdo_mysql mysqli pgsql redis bcmath
+    && docker-php-ext-install pdo pdo_pgsql pdo_mysql mysqli pgsql redis bcmath zip
 
 RUN pecl install redis memcached-2.2.0 xdebug mongodb
 RUN docker-php-ext-enable xdebug
@@ -17,6 +17,3 @@ RUN docker-php-ext-enable xdebug
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/php.ini
-RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongo.ini
-RUN echo "extension=mongodb.so" >> /usr/local/etc/php/php.ini
-RUN echo "extension=zip.so" >> /usr/local/etc/php/php.ini

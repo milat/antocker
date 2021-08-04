@@ -14,7 +14,7 @@ RUN apt-get update && \
     && echo 'redis' >> /usr/src/php-available-exts \
     && docker-php-ext-install redis
 
-RUN docker-php-ext-install pdo pdo_mysql mysqli
+RUN docker-php-ext-install pdo pdo_mysql mysqli zip
 
 RUN apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
@@ -45,6 +45,3 @@ RUN docker-php-ext-install bcmath
 RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/php.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongo.ini
-RUN echo "extension=mongodb.so" >> /usr/local/etc/php/php.ini
