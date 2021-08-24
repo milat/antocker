@@ -2,7 +2,7 @@ FROM php:5.6-apache
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y git zip unzip libssl-dev zlib1g-dev libmemcached-dev pkg-config
+    apt-get install -y git zip unzip libssl-dev zlib1g-dev libmemcached-dev pkg-config libgmp-dev
 
 
 RUN apt-get install -y libpq-dev \
@@ -13,6 +13,12 @@ RUN pecl install mongodb-1.7.4
 
 RUN docker-php-ext-install pdo pdo_mysql pgsql mysqli zip
 RUN docker-php-ext-enable xdebug
+
+RUN apt-get clean; \
+    ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include;
+
+RUN docker-php-ext-configure gmp
+RUN docker-php-ext-install gmp
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
